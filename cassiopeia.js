@@ -1,23 +1,36 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault("counter", 0);
+Replies = new Mongo.Collection('replies');
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get("counter");
-    }
-  });
+
+if (Meteor.isClient) {
+  Template.hello.greeting = function () {
+    return "Welcome to terminal.";
+  };
 
   Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
+    'click #button': function () {
+      console.log("clicking");
+      var cmd = $("input#command").val();
+      console.log("command", cmd);
+      var replyId = Meteor.call('command', cmd);
+      Session.set('replyId', replyId);
     }
   });
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+  exec = Npm.require('child_process').exec;
+  Meteor.methods({
+    'command' : function(line) {
+      console.log("In command method", line);
+      Fiber = Npm.require('fibers');
+      exec(line, function(error, stdout, stderr) {
+        console.log('Command Method', error, stdout, stderr);
+        Fiber(function() {
+          Replies.remove({});
+          var replyId = Replies.insert({message: stdout ? stdout : stderr});
+          return replyId;  
+        }).run();
+      }); 
+    }
   });
 }
