@@ -2,21 +2,6 @@ Replies = new Mongo.Collection('replies');
 
 
 if (Meteor.isClient) {
-  Template.hello.helpers ({
-    greeting : function () {
-      return "Welcome to terminal.";
-    }
-  });
-
-  Template.hello.events({
-    'click #button': function () {
-      console.log("clicking");
-      var cmd = $("input#command").val();
-      console.log("command", cmd);
-      var replyId = Meteor.call('command', cmd);
-      Session.set('replyId', replyId);
-    }
-  });
   Template.home.helpers ({
     greeting : function () {
       return "Welcome to terminal.";

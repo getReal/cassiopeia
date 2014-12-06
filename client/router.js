@@ -1,9 +1,38 @@
 Router.configure({
-  layoutTemplate: 'layout'
+	layoutTemplate: 'applayout',
+	notFoundTemplate: 'notFound'
 });
 
-Router.route('/', function () {
-  this.render('home', {
-    // data: function () { return Items.findOne({_id: this.params._id}) }
-  });
+Router.onAfterAction(function() {
+  if (! Meteor.userId()) {
+  	this.layout('homelayout');
+    this.render('home');
+    this.redirect('/');
+    // this.go('home');
+  } else {
+  	// this.go('dashboard');
+    this.next();
+
+  }
+});
+
+Router.route('/', {
+	onBeforeAction: function() {
+	  if (! Meteor.userId()) {
+	  	this.layout('homelayout');
+	    this.render('home');
+	    // this.go('home');
+	  } else {
+	  	this.redirect('dashboard');
+	    // this.next();
+	  }
+	}
+
+});
+
+Router.route('/dashboard', {
+  action: function () {
+    // render all templates and regions for this route
+    this.render();
+  }
 });
