@@ -8,8 +8,8 @@ autopublish
 insecure
 less
 iron:router
-accounts-ui
 accounts-github
 mizzao:bootstrap-3
 fortawesome:fontawesome
-
+accounts-password
+mrt:accounts-ui-bootstrap-3
