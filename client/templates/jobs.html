@@ -1,0 +1,48 @@
+<template name="job">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">{{title}}</h3>
+	  </div>
+	  <div class="panel-body">
+	    Commands, vars etc
+	  </div>
+	</div>
+</template>
+
+<template name="jobs_list">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Your Jobs</h3>
+	  </div>
+	  <div class="panel-body">
+	  	{{#if jobs}}
+	  	  <ul class="list-group">
+		    {{#each jobs}}
+		    	<a href="/job/{{_id}}"><li class="list-group-item">{{title}} : {{createdAt}}</li></a>
+		    {{/each}}
+		  </ul>
+		{{else}}
+			<button class="btn btn-lg btn-success">Create a job!</button>
+		{{/if}}
+	  </div>
+	</div>
+</template>
+
+<template name="jobs_add_edit">
+	<form role="form">
+	  <div class="form-group">
+	    <label for="jobName">Job name</label>
+	    <input type="textfield" class="form-control" id="jobName" placeholder="Enter Job name">
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">Password</label>
+	    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputFile">File input</label>
+	    <input type="file" id="exampleInputFile">
+	    <p class="help-block">Example block-level help text here.</p>
+	  </div>
+	  <button type="submit" class="btn btn-default">Add</button>
+	</form>
+</template>

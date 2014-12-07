@@ -13,3 +13,7 @@ mizzao:bootstrap-3
 fortawesome:fontawesome
 accounts-password
 mrt:accounts-ui-bootstrap-3
+matb33:collection-hooks
+dburles:collection-helpers
+mrt:moment
+

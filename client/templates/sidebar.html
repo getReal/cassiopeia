@@ -1,0 +1,27 @@
+<template name="sidebar">
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+		{{>dashboard_sidebar}}
+		{{>global_conf_sidebar}}
+	</div><!--/.sidebar-offcanvas-->
+</template>
+
+<template name="dashboard_sidebar">
+	<div class="list-group">
+	  <a href="/dashboard/add" class="list-group-item"><i class=" fa fa-plus"> Add a job</i></a>
+	</div>
+</template>
+
+<template name="global_conf_sidebar">
+	<div class="list-group">
+	  <a href="/dashboard/config" class="list-group-item"><i class=" fa fa-cog"> Global configuration</i></a>
+	</div>
+</template>
+
+<template name="job_sidebar">
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+		<div class="list-group">
+		  <a href="/dashboard/add" class="list-group-item"><i class=" fa fa-cog"> Configure</i></a>
+		  <a href="/dashboard/add" class="list-group-item"><i class=" fa fa-space-shuttle"> Build now</i></a>
+		</div>
+	</div>
+</template>
