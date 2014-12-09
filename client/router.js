@@ -39,9 +39,11 @@ Router.route('/dashboard', {
   // in the layout
   yieldRegions: {
     'sidebar': {to: 'aside'}
-  },  
+  },
   action: function () {
     // render all templates and regions for this route
+    Session.set('job_conf', null);
+    Session.set('job_view', null);
     this.render();
   }
 });
@@ -49,7 +51,7 @@ Router.route('/dashboard', {
 Router.route('/dashboard/add', {
   yieldRegions: {
     'sidebar': {to: 'aside'}
-  },  
+  },
   action: function () {
     // render all templates and regions for this route
     this.render('addJob');
@@ -60,8 +62,9 @@ Router.route('/dashboard/add', {
 Router.route('/job/:_id', {
   // yieldRegions: {
   //   'sidebar': {to: 'aside'}
-  // },  
+  // },
   action: function () {
+    Session.set('job_view', this.params._id);
     this.render('job', {
       data: function () {
         return Jobs.findOne({_id: this.params._id});

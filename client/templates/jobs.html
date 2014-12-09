@@ -1,7 +1,14 @@
 <template name="job">
 	<div class="panel panel-default">
 	  <div class="panel-heading">
-	    <h3 class="panel-title">{{title}}</h3>
+		{{#if editing}}
+			<div class="form-group">
+				<label for="job-title">Editing {{title}}</label>
+				<input type="text" name="job-title" class="form-control" id="job-title" placeholder="{{title}}" />
+			</div>
+		{{else}}
+		    <h3 class="panel-title">{{title}}</h3>
+		{{/if}}
 	  </div>
 	  <div class="panel-body">
 	    Commands, vars etc
