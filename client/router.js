@@ -70,9 +70,11 @@ Router.route('/job/:_id', {
   // },
   action: function () {
     Session.set('job_view', this.params._id);
+    // var $this = this;
     this.render('job', {
-      data: function () {
-        return Jobs.findOne({_id: this.params._id});
+      data: {
+        job: Jobs.findOne({_id: this.params._id}),
+        commands: Commands.find({parent_job: this.params._id})
       }
     });
     this.render('job_sidebar', {to: 'aside'});

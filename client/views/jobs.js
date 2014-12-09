@@ -7,8 +7,6 @@ Template.jobs_list.helpers({
 
 Template.addJob.events({
   'submit #add-job-form': function (evt, tpl) { // select list
-    // Router.setList(this._id);
-    // Session.set('listname', this._name);
     var title = document.getElementById('addJobTitle').value;
     var cur = Jobs.insert({
       owner: Meteor.userId(),
@@ -25,9 +23,34 @@ Template.job.helpers({
   editing: function () {
     // Session.set('job_view', null);
     return Session.get('job_conf') === this._id;
+  },
+  adding_command: function () {
+    return Session.get('adding_command') === this._id;
+  },
+  job_title: function () {
+    return this.job.title;
+  },
+  commands: function () {
+    return this.commands;
   }
+
 });
 
+Template.job.events({
+  'submit .add-command': function (evt, tpl) {
+    // TODO in commands file
+    var name = $(tpl.find('.command-title')).val();
+    var body = $(tpl.find('.command-value')).val();
+    Commands.insert({
+      name: name,
+      body: body,
+      owner: Meteor.userId(),
+      parent_job: this.job._id
+    })
+
+    return false;
+  }
+});
 Template.job_sidebar.helpers({
   viewing: function () {
     // Session.set('job_conf', null);
