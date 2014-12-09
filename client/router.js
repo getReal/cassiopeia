@@ -59,6 +59,17 @@ Router.route('/dashboard/add', {
   }
 });
 
+Router.route('/dashboard/config', {
+  yieldRegions: {
+    'sidebar': {to: 'aside'}
+  },
+  action: function () {
+    // render all templates and regions for this route
+    this.render('globalConf');
+    this.render('sidebar', {to: 'aside'});
+  }
+});
+
 Router.route('/job/:_id', {
   // yieldRegions: {
   //   'sidebar': {to: 'aside'}
