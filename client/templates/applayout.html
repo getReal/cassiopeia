@@ -7,11 +7,11 @@
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="fa fa-align-right fa-2x"></span>
         </button>
-        <a class="navbar-brand" href="/dashboard">Cassiopeia</a>
+        <a class="navbar-brand" href="/dashboard"><i class="fa fa-space-shuttle brand"></i> Cassiopeia</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="{{isActivePath regex='dashboard'}}"><a href="/dashboard">Dashboard</a></li>
+          <li class="{{isActiveRoute regex='dashboard'}}"><a href="/dashboard">Dashboard</a></li>
 <!--           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li> -->
         </ul>
@@ -39,8 +39,8 @@
 
     <hr>
 
-    <footer>
-      <p>&copy; a getreal web project 2014</p>
+    <footer class="text-center">
+      <p>&copy; a getreal meteor.js project 2014</p>
     </footer>
 
   </div><!--/.container-->
