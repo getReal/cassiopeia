@@ -4,15 +4,31 @@
 		{{#if editing}}
 			<div class="form-group">
 				<label for="job-title">Editing {{title}}</label>
-				<input type="text" name="job-title" class="form-control" id="job-title" placeholder="{{title}}" />
+				<input type="text" name="job-title" class="form-control" id="job-title" value="{{title}}" />
 			</div>
 		{{else}}
 		    <h3 class="panel-title">{{title}}</h3>
 		{{/if}}
 	  </div>
 	  <div class="panel-body">
-	    Commands, vars etc
+		{{#if editing}}
+			<div class="form-group">
+				<label for="command">Add a command</label>
+				<input type="text" name="command-title" class="form-control" id="command-title" placeholder="Command name" />
+				<textarea type="textarea" rows="5" name="jcommand-value" class="form-control" id="command-value" placeholder="Enter a shell command..."></textarea>
+			</div>
+			<div class="form-group">
+				<input type="submit" name="add-command" class="btn btn-default" id="add-command" value="Add command" />
+			</div>
+		{{else}}
+		    ...saved commands
+		{{/if}}
 	  </div>
+	  {{#if editing}}
+	  	<div class="panel-footer">
+			<button type="submit" name="save-job" class="btn btn-warning btn-lg" id="save-job"><i class="fa fa-save"></i> Save job</button>
+	  	</div>
+	  {{/if}}
 	</div>
 </template>
 
