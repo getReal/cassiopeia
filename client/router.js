@@ -64,7 +64,7 @@ Router.route('/dashboard/config', {
   }
 });
 
-Router.route('/job/:_id', {
+Router.route('/job/:_id/overview', {
   // yieldRegions: {
   //   'sidebar': {to: 'aside'}
   // },
@@ -78,5 +78,26 @@ Router.route('/job/:_id', {
       }
     });
     this.render('job_sidebar', {to: 'aside'});
+  }
+});
+
+Router.route('/job/:_id/build', {
+  action: function () {
+    var commands = Commands.find({parent_job: this.params._id});
+    Session.set('job_building', this.params._id);
+    Meteor.call('cmd', 'pwd', function (err, data) {
+      Session.set('output', data );
+    });
+    // var $this = this;
+    this.render('job_building', {
+      data: function () {
+        return Session.get('output');
+      }
+    });
+    this.render('job_sidebar', {to: 'aside'});
+  },
+  onAfterAction: function() {
+    var commands = Commands.find({parent_job: this.params._id})
+
   }
 });

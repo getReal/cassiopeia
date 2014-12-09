@@ -13,7 +13,7 @@ Template.addJob.events({
       title: title
     })
     Session.set('job_view', cur);
-    Router.go('/job/' + cur);
+    Router.go('/job/' + cur + '/overview');
     // Don't really submit.
     return false;
   }
@@ -59,26 +59,26 @@ Template.job_sidebar.helpers({
 });
 
 Template.job_sidebar.events({
-  'click #jconf': function (evt, tpl) { // select list
-    var $link = $(evt.target);
-    var attr = $link.attr('data-target');
-    Session.set('job_conf', attr);
-    $('.list-group-item').removeClass('active');
-    $link.toggleClass('active');
-  },
-  'click #jbuild': function (evt, tpl) { // select list
-    var $link = $(evt.target)
-    var attr = $link.attr('data-target');
-    Session.set('job_build', attr);
-    $('.list-group-item').removeClass('active');
-    $link.toggleClass('active');
-  },
-  'click #jview': function (evt, tpl) { // select list
-    var $link = $(evt.target)
-    var attr = $link.attr('data-target');
-    Session.set('job_conf', null);
-    Session.set('job_view', attr);
-    $('.list-group-item').removeClass('active');
-    $link.toggleClass('active');
-  }
+  // 'click #jconf': function (evt, tpl) { // select list
+  //   var $link = $(evt.target);
+  //   var attr = $link.attr('data-target');
+  //   Session.set('job_conf', attr);
+  //   $('.list-group-item').removeClass('active');
+  //   $link.toggleClass('active');
+  // },
+  // 'click #jbuild': function (evt, tpl) { // select list
+  //   var $link = $(evt.target)
+  //   var attr = $link.attr('data-target');
+  //   Session.set('job_build', attr);
+  //   $('.list-group-item').removeClass('active');
+  //   $link.toggleClass('active');
+  // },
+  // 'click #jview': function (evt, tpl) { // select list
+  //   var $link = $(evt.target)
+  //   var attr = $link.attr('data-target');
+  //   Session.set('job_conf', null);
+  //   Session.set('job_view', attr);
+  //   $('.list-group-item').removeClass('active');
+  //   $link.toggleClass('active');
+  // }
 });

@@ -20,9 +20,9 @@
 <template name="job_sidebar">
 	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
 		<div class="list-group">
-			<a href="#" data-target="{{viewing}}" class="list-group-item active" id="jview"><i class=" fa fa-binoculars"> View</i></a>
-			<a href="#configure" data-target="{{viewing}}" class="list-group-item" id="jconf"><i class=" fa fa-cog"> Configure</i></a>
-			<a href="#build" data-target="{{viewing}}" class="list-group-item" id="jbuild"><i class=" fa fa-space-shuttle"> Build now</i></a>
+			<a href="/job/{{viewing}}/overview" data-target="{{viewing}}" class="list-group-item {{isActivePath regex='overview'}}" id="jview"><i class=" fa fa-binoculars"> Job Overview</i></a>
+<!-- 			<a href="#configure" data-target="{{viewing}}" class="list-group-item" id="jconf"><i class=" fa fa-cog"> Configure</i></a> -->
+			<a href="/job/{{viewing}}/build" data-target="{{viewing}}" class="list-group-item {{isActivePath regex='build'}}" id="jbuild"><i class=" fa fa-space-shuttle"> Build now</i></a>
 		</div>
 	</div>
 </template>
