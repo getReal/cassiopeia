@@ -31,12 +31,6 @@ Router.route('/', {
 });
 
 Router.route('/dashboard', {
-  // data: function () {
-  //   return Jobs.find({owner: Meteor.userId()});
-  // },
-
-  // A declarative way of providing templates for each yield region
-  // in the layout
   yieldRegions: {
     'sidebar': {to: 'aside'}
   },
