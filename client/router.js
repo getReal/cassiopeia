@@ -101,3 +101,18 @@ Router.route('/job/:_id/build', {
 
   }
 });
+
+Router.route('/job/:_id/edit', {
+  action: function () {
+    Session.set('editing', this.params._id);
+    // var $this = this;
+    this.render('job', {
+      data: {
+        job: Jobs.findOne({_id: this.params._id}),
+        commands: Commands.find({parent_job: this.params._id}),
+        commandsCount: Commands.find({parent_job: this.params._id}).count()                           
+      }
+    });
+    this.render('job_sidebar', {to: 'aside'});
+  }
+});

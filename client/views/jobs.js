@@ -1,9 +1,28 @@
+
+// var jobsHandle = Meteor.subscribe('jobs', function () {
+//     Jobs.find({admin: this.userId}, {fields: {secretInfo: 1}});
+// });
+// console.log(jobsHandle.ready());
 ////////// Lists //////////
 Template.jobs_list.helpers({
   jobs: function () {
     return Jobs.find({owner: Meteor.userId()});
+  },
+  count: function () {
+    return Jobs.find({owner: Meteor.userId()}).count();
   }
 })
+Template.jobs_list.events({
+  'click .deleteJob': function (evt, tpl) {
+    console.log(this._id)
+    Jobs.remove(this._id)
+  },
+  'click .editJob': function (evt, tpl) {
+    Session.set('editing_job', this._id);
+    
+    Router.go('/job/' + this._id + '/edit');
+  }
+});
 
 Template.addJob.events({
   'submit #add-job-form': function (evt, tpl) { // select list
@@ -21,8 +40,7 @@ Template.addJob.events({
 
 Template.job.helpers({
   editing: function () {
-    // Session.set('job_view', null);
-    return Session.get('job_conf') === this._id;
+    return Session.get('editing_job') === this._id;
   },
   adding_command: function () {
     return Session.get('adding_command') === this._id;
@@ -32,7 +50,11 @@ Template.job.helpers({
   },
   commands: function () {
     return this.commands;
+  },
+  commandsCount: function () {
+    return this.commandsCount;
   }
+
 
 });
 

@@ -12,6 +12,16 @@
 	  </div>
 	  <div class="panel-body">
 		{{#if editing}}
+			{{#if commandsCount}}
+			<!-- // TODO Editing commands -->
+				<dl class="dl-horizontal">
+				    {{#each commands}}
+						<dt>{{name}}</dt>
+						<dd>{{body}}</dd>
+				    {{/each}}
+				</dl>
+			{{/if}}
+
 			<div class="panel panel-success">
 				<div class="panel-heading"><h3 class="panel-title">Commands</h3></div>
 				<div class="panel-body">
@@ -30,12 +40,14 @@
 				</div>
 			</div>
 		{{else}}
-			<dl class="dl-horizontal">
-			    {{#each commands}}
-					<dt>{{name}}</dt>
-					<dd>{{body}}</dd>
-			    {{/each}}
-			</dl>
+			{{#if commandsCount}}
+				<dl class="dl-horizontal">
+				    {{#each commands}}
+						<dt>{{name}}</dt>
+						<dd>{{body}}</dd>
+				    {{/each}}
+				</dl>
+			{{/if}}
 		{{/if}}
 	  </div>
 	  {{#if editing}}
@@ -52,10 +64,14 @@
 	    <h3 class="panel-title">Your Jobs</h3>
 	  </div>
 	  <div class="panel-body">
-	  	{{#if jobs}}
+	  	{{#if count}}
 	  	  <ul class="list-group">
 		    {{#each jobs}}
-		    	<a href="/job/{{_id}}/overview"><li class="list-group-item">{{title}} : {{createdAt}}</li></a>
+		    	<li class="list-group-item">
+		    		<a href="/job/{{_id}}/overview">{{title}} : {{createdAt}}</a>
+		    		<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteJob"></button>
+		    		<button class="fa fa-edit btn btn-warning btn-xs pull-right editJob"></button>
+		    	</li>
 		    {{/each}}
 		  </ul>
 		{{else}}
