@@ -57,19 +57,22 @@ Template.job.helpers({
 Template.job.events({
   'submit .add-command': function (evt, tpl) {
     // TODO in commands file
-    var name = $(tpl.find('.command-title')).val();
-    var body = $(tpl.find('.command-value')).val();
+    var name = tpl.$('.command-title').val();
+    var body = tpl.$('.command-value').val();
     Commands.insert({
       name: name,
       body: body,
       owner: Meteor.userId(),
       parent_job: this.job._id
-    })
-
+    });
+    tpl.$('.command-title').val('');
+    tpl.$('.command-value').val('');
     return false;
   },
   'click .deleteJob': function (evt, tpl) {
-    Jobs.remove(this.job._id)
+    Jobs.remove(this.job._id);
+    // Todo , remove its commands onBeforeRemove
+    // Commands.remove(this.job._id);
   },
   'click .editJob': function (evt, tpl) {
     Router.go('/job/' + this.job._id + '/edit');

@@ -5,7 +5,6 @@
 			<div class="form-group">
 				<label for="job-title">Editing {{job_title}}</label>
 				<input type="text" name="job-title" class="form-control" id="job-title" value="{{job_title}}" />
-				<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteJob"></button>
 			</div>
 		{{else}}
 		    <h3 class="panel-title">{{job_title}}
@@ -59,7 +58,8 @@
 	  </div>
 	  {{#if editing}}
 	  	<div class="panel-footer">
-			<button type="submit" name="save-job" class="btn btn-warning btn-lg" id="save-job"><i class="fa fa-save"></i> Save job</button>
+			<button type="submit" name="save-job" class="btn btn-warning" id="save-job"><i class="fa fa-save"></i> Save job</button>
+			<button type="submit" name="save-job" class="btn btn-danger deleteJob pull-right"><i class="fa fa-trash"></i> Delete job</button>
 	  	</div>
 	  {{/if}}
 	</div>
