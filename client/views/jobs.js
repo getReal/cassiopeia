@@ -18,8 +18,6 @@ Template.jobs_list.events({
     Jobs.remove(this._id)
   },
   'click .editJob': function (evt, tpl) {
-    Session.set('editing_job', this._id);
-    
     Router.go('/job/' + this._id + '/edit');
   }
 });
@@ -40,10 +38,10 @@ Template.addJob.events({
 
 Template.job.helpers({
   editing: function () {
-    return Session.get('editing_job') === this._id;
+    return Session.equals('editing_job', this.job._id);
   },
   adding_command: function () {
-    return Session.get('adding_command') === this._id;
+    return Session.equals('adding_command', this.job._id);
   },
   job_title: function () {
     return this.job.title;
@@ -52,10 +50,8 @@ Template.job.helpers({
     return this.commands;
   },
   commandsCount: function () {
-    return this.commandsCount;
+    return this.commands.count();
   }
-
-
 });
 
 Template.job.events({
@@ -71,36 +67,24 @@ Template.job.events({
     })
 
     return false;
+  },
+  'click .deleteJob': function (evt, tpl) {
+    Jobs.remove(this.job._id)
+  },
+  'click .editJob': function (evt, tpl) {
+    Router.go('/job/' + this.job._id + '/edit');
   }
+  // ,
+  // 'click .deleteCommand': function (evt, tpl) {
+  //   Jobs.remove(this.job._id)
+  // },
+  // 'click .editCommand': function (evt, tpl) {
+  //   alert()
+  //   Router.go('/job/' + this.job._id + '/edit');
+  // }
 });
 Template.job_sidebar.helpers({
-  viewing: function () {
-    // Session.set('job_conf', null);
-    return Session.get('job_view');
+  id: function () {
+    return this;
   }
-});
-
-Template.job_sidebar.events({
-  // 'click #jconf': function (evt, tpl) { // select list
-  //   var $link = $(evt.target);
-  //   var attr = $link.attr('data-target');
-  //   Session.set('job_conf', attr);
-  //   $('.list-group-item').removeClass('active');
-  //   $link.toggleClass('active');
-  // },
-  // 'click #jbuild': function (evt, tpl) { // select list
-  //   var $link = $(evt.target)
-  //   var attr = $link.attr('data-target');
-  //   Session.set('job_build', attr);
-  //   $('.list-group-item').removeClass('active');
-  //   $link.toggleClass('active');
-  // },
-  // 'click #jview': function (evt, tpl) { // select list
-  //   var $link = $(evt.target)
-  //   var attr = $link.attr('data-target');
-  //   Session.set('job_conf', null);
-  //   Session.set('job_view', attr);
-  //   $('.list-group-item').removeClass('active');
-  //   $link.toggleClass('active');
-  // }
 });

@@ -5,22 +5,29 @@
 			<div class="form-group">
 				<label for="job-title">Editing {{job_title}}</label>
 				<input type="text" name="job-title" class="form-control" id="job-title" value="{{job_title}}" />
+				<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteJob"></button>
 			</div>
 		{{else}}
-		    <h3 class="panel-title">{{job_title}}</h3>
+		    <h3 class="panel-title">{{job_title}}
+				<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteJob"></button>
+				<button class="fa fa-edit btn btn-warning btn-xs pull-right editJob"></button>
+		    </h3>
 		{{/if}}
 	  </div>
 	  <div class="panel-body">
 		{{#if editing}}
-			{{#if commandsCount}}
+			<!-- {{#if commandsCount}} -->
 			<!-- // TODO Editing commands -->
 				<dl class="dl-horizontal">
 				    {{#each commands}}
 						<dt>{{name}}</dt>
-						<dd>{{body}}</dd>
+						<dd>{{body}}
+							<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteCommand"></button>
+							<button class="fa fa-edit btn btn-warning btn-xs pull-right editCommand"></button>
+						</dd>
 				    {{/each}}
 				</dl>
-			{{/if}}
+			<!-- {{/if}} -->
 
 			<div class="panel panel-success">
 				<div class="panel-heading"><h3 class="panel-title">Commands</h3></div>

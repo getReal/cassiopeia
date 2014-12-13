@@ -36,7 +36,7 @@ Router.route('/dashboard', {
   },
   action: function () {
     // render all templates and regions for this route
-    Session.set('job_conf', null);
+    Session.set('editing_job', null);
     Session.set('job_view', null);
     this.render();
   }
@@ -70,6 +70,7 @@ Router.route('/job/:_id/overview', {
   // },
   action: function () {
     Session.set('job_view', this.params._id);
+    Session.set('editing_job', null);
     // var $this = this;
     this.render('job', {
       data: {
@@ -77,13 +78,19 @@ Router.route('/job/:_id/overview', {
         commands: Commands.find({parent_job: this.params._id})
       }
     });
-    this.render('job_sidebar', {to: 'aside'});
+    this.render('job_sidebar', {
+      to: 'aside',
+      data: this.params._id
+    });
   }
 });
 
 Router.route('/job/:_id/build', {
   action: function () {
-    var commands = Commands.find({parent_job: this.params._id});
+    // var commands = Commands.find({parent_job: this.params._id}).fetch();
+    // _.each(commands, function(el) {
+    //   console.log(el)
+    // })
     Session.set('job_building', this.params._id);
     Meteor.call('cmd', 'pwd', function (err, data) {
       Session.set('output', data );
@@ -94,7 +101,10 @@ Router.route('/job/:_id/build', {
         return Session.get('output');
       }
     });
-    this.render('job_sidebar', {to: 'aside'});
+    this.render('job_sidebar', {
+      to: 'aside',
+      data: this.params._id
+    });
   },
   onAfterAction: function() {
     var commands = Commands.find({parent_job: this.params._id})
@@ -104,7 +114,7 @@ Router.route('/job/:_id/build', {
 
 Router.route('/job/:_id/edit', {
   action: function () {
-    Session.set('editing', this.params._id);
+    Session.set('editing_job', this.params._id);
     // var $this = this;
     this.render('job', {
       data: {
@@ -113,6 +123,9 @@ Router.route('/job/:_id/edit', {
         commandsCount: Commands.find({parent_job: this.params._id}).count()                           
       }
     });
-    this.render('job_sidebar', {to: 'aside'});
+    this.render('job_sidebar', {
+      to: 'aside',
+      data: this.params._id
+    });
   }
 });
