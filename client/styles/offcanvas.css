@@ -56,4 +56,8 @@ footer {
     top: 0;
     width: 50%; /* 6 columns */
   }
+  .toggle-right {
+    margin-left: 15px;
+    margin-right: 0;
+  }
 }
