@@ -7,10 +7,15 @@ Meteor.publish('commands-per-job', function(jobId){
 });
 
 Jobs.allow({
-  insert: function (userId, job) {
-  	if (userId)
-    return true;
-  }
+	insert: function (userId, job) {
+		return (job.owner === userId)
+	},
+	update:function(userId, doc, fields, modifier){
+		return (doc.owner === userId);
+	},
+	remove:function(userId, doc){
+		return (doc.owner === userId);
+	},
 });
 Commands.allow({
   insert: function (userId, command) {
