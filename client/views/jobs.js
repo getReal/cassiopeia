@@ -22,6 +22,9 @@ Template.jobs_list.events({
   },
   'click .editJob': function (evt, tpl) {
     Router.go('/job/' + this._id + '/edit');
+  },
+  'click .create-job': function (evt, tpl) {
+    Router.go('/dashboard/add');
   }
 });
 
@@ -32,8 +35,8 @@ Template.addJob.events({
       owner: Meteor.userId(),
       title: title
     })
-    Session.set('job_view', cur);
-    Router.go('/job/' + cur + '/overview');
+    Session.set('editing_job', cur);
+    Router.go('/job/' + cur + '/edit');
     // Don't really submit.
     return false;
   }
