@@ -1,4 +1,7 @@
 
+Meteor.subscribe('jobs-per-user');
+Meteor.subscribe('commands-per-job');
+
 // var jobsHandle = Meteor.subscribe('jobs', function () {
 //     Jobs.find({admin: this.userId}, {fields: {secretInfo: 1}});
 // });
@@ -6,10 +9,10 @@
 ////////// Lists //////////
 Template.jobs_list.helpers({
   jobs: function () {
-    return Jobs.find({owner: Meteor.userId()});
+    return Jobs.find();
   },
   count: function () {
-    return Jobs.find({owner: Meteor.userId()}).count();
+    return Jobs.find().count();
   }
 })
 Template.jobs_list.events({
