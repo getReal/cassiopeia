@@ -14,22 +14,27 @@
 		{{/if}}
 	  </div>
 	  <div class="panel-body">
-		{{#if editing}}
-			<!-- {{#if commandsCount}} -->
-			<!-- // TODO Editing commands -->
-				<dl class="dl-horizontal">
-				    {{#each commands}}
-						<dt>{{name}}</dt>
-						<dd>{{body}}
-							<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteCommand"></button>
-							<button class="fa fa-edit btn btn-warning btn-xs pull-right editCommand"></button>
-						</dd>
-				    {{/each}}
-				</dl>
-			<!-- {{/if}} -->
+		{{#if editing}}			
+		<!-- // TODO Editing commands -->
+			<div class="well commands">
+				<p class="">Commands</p>
+				{{#if commands.count}}
+					<dl class="dl-horizontal">
+					    {{#each commands}}
+							<dt>{{name}}</dt>
+							<dd>{{body}}
+								<button class="fa fa-trash btn btn-danger btn-xs pull-right deleteCommand"></button>
+								<button class="fa fa-edit btn btn-warning btn-xs pull-right editCommand"></button>
+							</dd>
+					    {{/each}}
+					</dl>
+				{{else}}
+					No commands yet, add some using the form below
+				{{/if}}
+			</div>
 
 			<div class="panel panel-success">
-				<div class="panel-heading"><h3 class="panel-title">Commands</h3></div>
+				<div class="panel-heading"><h3 class="panel-title">Add more Commands</h3></div>
 				<div class="panel-body">
 					<form role="form" class="add-command">
 						<div class="form-group">
@@ -46,14 +51,20 @@
 				</div>
 			</div>
 		{{else}}
-			{{#if commandsCount}}
-				<dl class="dl-horizontal">
-				    {{#each commands}}
-						<dt>{{name}}</dt>
-						<dd>{{body}}</dd>
-				    {{/each}}
-				</dl>
-			{{/if}}
+			<div class="well commands">
+				<p class="">Commands</p>
+				{{#if commands.count}}
+					<dl class="dl-horizontal">
+					    {{#each commands}}
+							<dt>{{name}}</dt>
+							<dd>{{body}}</dd>
+					    {{/each}}
+					</dl>
+				{{else}}
+					No commands? Edit job to add commands.
+					<!-- //TODO edit link or addForm -->
+				{{/if}}
+			</div>
 		{{/if}}
 	  </div>
 	  {{#if editing}}
