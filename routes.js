@@ -70,29 +70,41 @@ Router.map(function() {
 
   this.route('/job/:_id/build', {
     action: function () {
-      // var commands = Commands.find({parent_job: this.params._id}).fetch();
+      var commands = Commands.find({parent_job: this.params._id}).fetch();
+      console.log(typeof commands)
       // _.each(commands, function(el) {
       //   console.log(el)
       // })
+      var outputs;
       Session.set('job_building', this.params._id);
-      Meteor.call('cmd', 'pwd', function (err, data) {
-        Session.set('output', data );
+      Meteor.call('parallelAsyncJob', commands, function (err, data) {
+        console.log(err)
+        try {
+          console.log(data)
+          Session.set('output', data );
+          outputs = data;
+        }
+        catch (err) {
+          throw new Meteor.Error("pants-not-found", "Can't find my pants");
+        }
+        
       });
       // var $this = this;
       this.render('job_building', {
-        data: function () {
-          return Session.get('output');
+        data: {
+          output: output
         }
       });
       this.render('job_sidebar', {
         to: 'aside',
         data: this.params._id
       });
-    },
-    onAfterAction: function() {
-      var commands = Commands.find({parent_job: this.params._id})
-
     }
+    // ,
+    // onAfterAction: function() {
+    //   var commands = Commands.find({parent_job: this.params._id})
+
+    // }
   });
 
   this.route('/job/:_id/edit', {
