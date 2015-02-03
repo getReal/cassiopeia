@@ -1,6 +1,5 @@
 Replies = new Mongo.Collection('replies');
 
-
 if (Meteor.isClient) {
   Template.home.helpers ({
     greeting : function () {
@@ -35,4 +34,10 @@ if (Meteor.isServer) {
       }); 
     }
   });
+
+  Blog.config({
+    adminRole: 'blog-admin',
+    authorRole: 'blogAuthor'
+  });
+
 }
