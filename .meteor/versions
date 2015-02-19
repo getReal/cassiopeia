@@ -35,6 +35,7 @@ check@1.0.4
 chuangbo:cookie@1.1.0
 coffeescript@1.0.5
 dburles:collection-helpers@1.0.2
+dburles:mongo-collection-instances@0.2.6
 ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5
@@ -46,6 +47,7 @@ geojson-utils@1.0.2
 gfk:notifications@1.0.11
 github@1.1.2
 handlebars@1.0.2
+houston:admin@2.0.2
 html-tools@1.0.3
 htmljs@1.0.3
 http@1.0.10
@@ -106,6 +108,7 @@ spiderable@1.0.6
 srp@1.0.2
 stylus@1.0.6
 templating@1.0.11
+tmeasday:paginated-subscription@0.2.4
 tracker@1.0.5
 ui@1.0.5
 underscore@1.0.2
