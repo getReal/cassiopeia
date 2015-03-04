@@ -29,15 +29,24 @@ if (Meteor.isServer) {
         Fiber(function() {
           Replies.remove({});
           var replyId = Replies.insert({message: stdout ? stdout : stderr});
-          return replyId;  
+          return replyId;
         }).run();
-      }); 
+      });
     }
   });
 
   Blog.config({
     adminRole: 'blog-admin',
-    authorRole: 'blogAuthor'
+    authorRole: 'blog-author'
   });
 
+  Roles.addUsersToRoles("EPrk3i5uJKrh2ktrb", ['blog-admin','blog-author']);
+  Accounts.onCreateUser( function (options, user) {
+    user.roles = ["user"];
+
+    if ( options.profile )
+      user.profile = options.profile;
+
+    return user;
+  });
 }
